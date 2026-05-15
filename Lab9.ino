@@ -1,21 +1,20 @@
-// Föyde verilen pin tanımlamaları (Değiştirilmedi)
 const int LED1pin = 46; 
 const int LED2pin = 45;
 const int LED3pin = 44;
 const int LED4pin = 43;
 
-const int button1pin = 41; // ON/OFF Üstün Güç Butonu
-const int button2pin = 40; // Mod Değiştiren Buton
+const int button1pin = 41;
+const int button2pin = 40;
 
-// Sistem durum değişkenleri
-bool systemOn = false;      // Sistem başlangıçta KAPALI
-int mode = 0;               // Başlangıç modu Mode 0 (Sürekli yanık mod)
 
-// Buton durum takibi
+bool systemOn = false;     
+int mode = 0;               
+
+
 int lastButton1State = LOW;
 int lastButton2State = LOW;
 
-// Zamanlama ve Animasyon Değişkenleri
+
 unsigned long lastActionTime = 0;
 int stepCounter = 0;        
 bool blinkState = true;
