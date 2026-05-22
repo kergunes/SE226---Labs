@@ -1,0 +1,262 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(36, 37, 26, 27, 28, 29);
+
+int dP = 22;
+int aPin = 22; 
+int bPin = 28;
+int cPin = 27;
+int dPin = 26;
+int ePin = 25;
+int fPin = 24;
+int gPin = 23; 
+
+int pin1 = 33; 
+int pin2 = 34; 
+int pin3 = 35; 
+int pin4 = 36;
+
+int dig1 = 0; 
+int dig2 = 0; 
+int dig3 = 0; 
+int dig4 = 0; 
+
+
+unsigned long previousMillis = 0;
+const long interval = 1000; 
+
+void setup(){
+  lcd.begin(16, 2);
+  lcd.print("Counter:");
+
+  pinMode(aPin, OUTPUT);
+  pinMode(bPin, OUTPUT);
+  pinMode(cPin, OUTPUT);
+  pinMode(dPin, OUTPUT);
+  pinMode(ePin, OUTPUT);
+  pinMode(fPin, OUTPUT);
+  pinMode(gPin, OUTPUT);
+  pinMode(dP, OUTPUT);
+
+  pinMode(pin1, OUTPUT);
+  pinMode(pin2, OUTPUT);
+  pinMode(pin3, OUTPUT);
+  pinMode(pin4, OUTPUT);
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    incrementCounter();
+    updateLCD();
+  }
+
+  
+  selectDigit(4);
+  printNumber(dig4);
+  delay(5); 
+  
+  selectDigit(3);
+  printNumber(dig3);
+  delay(5);
+  
+  selectDigit(2);
+  printNumber(dig2);
+  delay(5);
+  
+  selectDigit(1);
+  printNumber(dig1);
+  delay(5);
+}
+
+void selectDigit(int digit) {
+  digitalWrite(pin1, LOW);
+  digitalWrite(pin2, LOW);
+  digitalWrite(pin3, LOW);
+  digitalWrite(pin4, LOW);
+
+  if (digit == 1) digitalWrite(pin1, HIGH);
+  else if (digit == 2) digitalWrite(pin2, HIGH);
+  else if (digit == 3) digitalWrite(pin3, HIGH);
+  else if (digit == 4) digitalWrite(pin4, HIGH);
+}
+
+void printNumber(int num) {
+  switch(num){
+    case 0: zero();  break;
+    case 1: one();   break;
+    case 2: two();   break;
+    case 3: three(); break;
+    case 4: four();  break;
+    case 5: five();  break;
+    case 6: six();   break;
+    case 7: seven(); break;
+    case 8: eight(); break;
+    case 9: nine();  break;
+  }
+}
+
+void updateLCD() {
+  lcd.setCursor(9, 0); 
+  lcd.print(dig4);
+  lcd.print(dig3);
+  lcd.print(dig2); 
+  lcd.print(dig1); 
+}
+
+void incrementCounter() {
+  dig1++;
+  if (dig1 >= 10) {
+    dig1 = 0;
+    dig2++;
+  }
+  if (dig2 >= 10) {
+    dig2 = 0;
+    dig3++;
+  }
+  if (dig3 >= 10) {
+    dig3 = 0;
+    dig4++;
+  }
+  if (dig4 >= 10) {
+    dig4 = dig3 = dig2 = dig1 = 0; 
+  }
+}
+
+void one() {
+ digitalWrite(aPin, LOW);
+ digitalWrite(bPin, LOW);
+ digitalWrite(cPin, LOW);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, LOW);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+void two() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, LOW);
+ digitalWrite(dPin, HIGH);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, LOW);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+void three() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, LOW);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+void four() {
+
+ digitalWrite(aPin, LOW);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, LOW);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+void five() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, LOW);
+
+}
+
+
+
+void six() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, HIGH);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, LOW);
+
+}
+
+
+
+void seven() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, LOW);
+ digitalWrite(cPin, LOW);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, LOW);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+void eight() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, HIGH);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+void nine() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, HIGH);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, LOW);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
+
+
+
+
+
+void zero() {
+
+ digitalWrite(aPin, HIGH);
+ digitalWrite(bPin, LOW);
+ digitalWrite(cPin, HIGH);
+ digitalWrite(dPin, HIGH);
+ digitalWrite(ePin, HIGH);
+ digitalWrite(fPin, HIGH);
+ digitalWrite(gPin, HIGH);
+
+}
